@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Button } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 
-export default function Cart(props) {
+const Cart = (props) => {
   const { cartItems, onAdd, onRemove } = props;
-  const itemsPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
+  const itemsPrice = cartItems?.reduce((a, c) => a + c.qty * c.price, 0);
   const taxPrice = itemsPrice * 0.14;
   const totalPrice = itemsPrice + taxPrice;
   const [show, setShow] = useState(false);
@@ -89,3 +89,5 @@ export default function Cart(props) {
     </aside>
   );
 }
+
+export default Cart;

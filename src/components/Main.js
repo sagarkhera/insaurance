@@ -1,7 +1,7 @@
 import React from 'react';
 import Cover from './Cover';
 
-export default function Main(props) {
+const Main = (props) => {
   const { products, onAdd } = props;
   return (
     <main className="cart-block cart-col-2">
@@ -14,3 +14,5 @@ export default function Main(props) {
     </main>
   );
 }
+
+export default Main;
