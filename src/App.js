@@ -2,12 +2,22 @@ import Header from './components/Header';
 import Main from './components/Main';
 import Cart from './components/Cart';
 import data from './data';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function App() {
+const App = () => {
   const { products } = data;
   const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    const items = JSON.parse(window.sessionStorage.getItem("cartItems")) || [];
+    setCartItems((items));
+  }, []);
+
+  useEffect(() => {
+    window.sessionStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
+
   const onAdd = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
     if (exist) {
