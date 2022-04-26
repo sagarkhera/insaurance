@@ -51,7 +51,7 @@ const App = () => {
           cartItems={cartItems}
           onAdd={onAdd}
           onRemove={onRemove}
-        ></Cart>
+        />
       </div>
     </div>
   );
