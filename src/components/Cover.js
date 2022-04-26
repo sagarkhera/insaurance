@@ -8,7 +8,8 @@ const Cover = (props) => {
       <h3>{product.name}</h3>
       <div>₹{product.price}</div>
       <div>
-        <button onClick={() => onAdd(product)}>Add To Cart</button>
+        <button onClick={() => onAdd(product)} className='cartbtn'>Add To Cart</button>
+        <br></br>
       </div>
     </div>
   );
