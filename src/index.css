@@ -21,6 +21,7 @@ a {
 .row-cart {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 .row-cart.center {
   align-items: center;
@@ -65,4 +66,7 @@ button.badge {
   border: none;
   color: #ffffff;
   width: 1.5rem;
+}
+button.cartbtn{
+  margin-bottom: 1rem;
 }
