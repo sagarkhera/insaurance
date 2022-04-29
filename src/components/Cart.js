@@ -11,6 +11,7 @@ const Cart = (props) => {
   const totalPrice = (discountPrice > 0 ? itemsPriceWithDiscount : itemsPrice) + taxPrice;
   const [show, setShow] = useState(false);
   const [discount, setDiscount] = useState('');
+  const [showError, setShowError] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -18,7 +19,13 @@ const Cart = (props) => {
     setDiscount(e.target.value);
   }
   const applyDiscount = () => {
-    discount==='five' && setDiscountPrice(0.05);
+    if(discount==='five') {
+      setDiscountPrice(0.05); 
+      setShowError(false);
+    }
+    else {
+      setShowError(true);
+    }
   }
   return (
     <aside className="cart-block cart-col-1">
@@ -77,6 +84,7 @@ const Cart = (props) => {
                 Checkout
               </button>
             </div>
+            {showError && <p className='discount'>Discount code is invalid!</p>}
             <Modal show={show} onHide={handleClose}>
               <Modal.Header closeButton>
                 <Modal.Title>Complete your purchase</Modal.Title>
