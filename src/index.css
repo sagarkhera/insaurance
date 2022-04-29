@@ -70,3 +70,7 @@ button.badge {
 button.cartbtn{
   margin-bottom: 1rem;
 }
+
+p.discount {
+  color: #f04040;
+}
