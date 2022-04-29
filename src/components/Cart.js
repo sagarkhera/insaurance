@@ -6,11 +6,20 @@ const Cart = (props) => {
   const { cartItems, onAdd, onRemove } = props;
   const itemsPrice = cartItems?.reduce((a, c) => a + c.qty * c.price, 0);
   const taxPrice = itemsPrice * 0.14;
-  const totalPrice = itemsPrice + taxPrice;
+  const [discountPrice, setDiscountPrice] = useState(0);
+  const itemsPriceWithDiscount = itemsPrice - (itemsPrice * discountPrice);
+  const totalPrice = (discountPrice > 0 ? itemsPriceWithDiscount : itemsPrice) + taxPrice;
   const [show, setShow] = useState(false);
+  const [discount, setDiscount] = useState('');
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const handleChange = (e) => {
+    setDiscount(e.target.value);
+  }
+  const applyDiscount = () => {
+    discount==='five' && setDiscountPrice(0.05);
+  }
   return (
     <aside className="cart-block cart-col-1">
       <h2>Cart Items</h2>
@@ -42,6 +51,10 @@ const Cart = (props) => {
               <div className="cart-col-1 text-right">₹{itemsPrice.toFixed(2)}</div>
             </div>
             <div className="row-cart">
+              <div className="cart-col-2">Discount</div>
+              <div className="cart-col-1 text-right">{discountPrice * 100 + '%'}</div>
+            </div>
+            <div className="row-cart">
               <div className="cart-col-2">Tax Price</div>
               <div className="cart-col-1 text-right">₹{taxPrice.toFixed(2)}</div>
             </div>
@@ -56,6 +69,10 @@ const Cart = (props) => {
             </div>
             <hr />
             <div className="row-cart">
+              <input type='text' value={discount} onChange={handleChange}/>
+              <button onClick={() => applyDiscount()}>
+                Apply Discount
+              </button>
               <button onClick={() => handleShow()}>
                 Checkout
               </button>
